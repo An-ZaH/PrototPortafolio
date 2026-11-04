@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+
+  <nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="#" id="nav-brand" class="font-bold text-xl tracking-tight text-white">Dev<span class="text-indigo-400">Portfolio</span></a>
+      <div class="flex items-center space-x-6 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-indigo-400 transition">Perfil</a>
+        <a href="#projects" class="hover:text-indigo-400 transition">Proyectos</a>
+        <a href="#contact" class="hover:text-indigo-400 transition">Contacto</a>
+        <div class="flex items-center space-x-2 border-l border-slate-800 pl-4">
+          <span id="status-github" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">GitHub: Verificando...</span>
+          <span id="status-supabase" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">Supabase: Verificando...</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section id="about" class="pt-32 pb-20 px-4">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+      <img id="github-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='1'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E" alt="Avatar" class="w-36 h-36 rounded-full border-2 border-indigo-500/50 bg-slate-900 object-cover">
+      <div>
+        <h1 class="text-4xl font-bold text-white mb-2"><span id="github-name" class="text-indigo-400">Cargando...</span></h1>
+        <p id="github-bio" class="text-slate-400 text-lg mb-4">Cargando biografía desde GitHub...</p>
+        <div class="flex items-center gap-4 text-sm text-slate-400 mb-6">
+          <span>Repositorios: <strong id="github-repos-count" class="text-white">-</strong></span>
+          <span>Seguidores: <strong id="github-followers-count" class="text-white">-</strong></span>
+        </div>
+        <div class="flex gap-4">
+          <a id="github-link" href="#" target="_blank" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-medium transition text-sm">Ver GitHub</a>
+          <a href="#contact" class="px-5 py-2.5 border border-slate-700 hover:border-slate-500 text-slate-300 rounded-lg font-medium transition text-sm">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 px-4 bg-slate-900/40 border-y border-slate-800/80">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-bold text-white mb-8">Repositorios de GitHub</h2>
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl bg-slate-900 border border-slate-800 text-slate-500 animate-pulse">Cargando repositorios reales...</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 px-4">
+    <div class="max-w-xl mx-auto">
+      <h2 class="text-2xl font-bold text-white mb-2 text-center">Enviar Mensaje</h2>
+      <p class="text-slate-400 text-center mb-8 text-sm">Los mensajes se guardan directamente en Supabase.</p>
+      
+      <form id="contact-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nombre</label>
+          <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email</label>
+          <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Mensaje</label>
+          <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition text-sm resize-none"></textarea>
+        </div>
+        <button type="submit" id="submit-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-lg transition text-sm">Enviar a Supabase</button>
+        <p id="form-feedback" class="hidden text-center text-sm font-medium text-emerald-400 mt-2">¡Mensaje guardado con éxito en Supabase!</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="py-8 border-t border-slate-800/80 text-center text-xs text-slate-500">
+    <div class="flex justify-center space-x-6 mb-4">
+      <a id="footer-github" href="#" target="_blank" class="hover:text-white transition">GitHub Profile</a>
+    </div>
+  </footer>
+
+  <script>
+    const GITHUB_USERNAME = 'An-ZaH'; 
+    const SUPABASE_URL = 'https://klqcxsrqjhtyeafxcyov.supabase.co'; 
+    const SUPABASE_ANON_KEY = 'sb_publishable_4vad-ACOe4Lh5oO0qxyZGg_FIPklTI1'; 
+
+async function loadProyectosDesdeSupabase() {
+  const grid = document.getElementById('projects-grid');
+  
+  try {
+    if (!supabaseClient) throw new Error('Cliente de Supabase no configurado');
+
+    // Consultar la tabla 'proyectos' ordenados por fecha más reciente
+    const { data: proyectos, error } = await supabaseClient
+      .from('proyectos')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    if (!proyectos || proyectos.length === 0) {
+      grid.innerHTML = `<p class="text-slate-400 text-sm col-span-full">No hay proyectos registrados en Supabase.</p>`;
+      return;
+    }
+
+    // Renderizar las tarjetas de cada proyecto
+    grid.innerHTML = proyectos.map(proyecto => `
+      <div class="p-6 rounded-xl bg-slate-900 border border-slate-800/80 hover:border-slate-700 transition flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-white text-base truncate">${proyecto.titulo}</h3>
+            ${proyecto.lenguaje ? `<span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">${proyecto.lenguaje}</span>` : ''}
+          </div>
+          <p class="text-slate-400 text-xs line-clamp-3 mb-4">${proyecto.descripcion || 'Sin descripción disponible.'}</p>
+        </div>
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-800/50">
+          <span>★ ${proyecto.estrellas || 0}</span>
+          <a href="${proyecto.url_github || '#'}" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">Ver proyecto →</a>
+        </div>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    console.error('Error al cargar proyectos desde Supabase:', err.message);
+    grid.innerHTML = `<p class="text-red-400 text-sm col-span-full">Error al conectar con la tabla de proyectos en Supabase.</p>`;
+  }
+}
+
+    
+    let supabaseClient = null;
+    if (window.supabase && !SUPABASE_URL.includes('tu-proyecto')) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    async function checkConnections() {
+      const statusGithub = document.getElementById('status-github');
+      const statusSupabase = document.getElementById('status-supabase');
+
+      try {
+        const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+        if (res.ok) {
+          statusGithub.textContent = 'GitHub: Conectado';
+          statusGithub.className = 'inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        statusGithub.textContent = 'GitHub: Error/Usuario no encontrado';
+        statusGithub.className = 'inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20';
+      }
+
+      if (supabaseClient) {
+        statusSupabase.textContent = 'Supabase: Conectado';
+        statusSupabase.className = 'inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+      } else {
+        statusSupabase.textContent = 'Supabase: Claves pendientes';
+        statusSupabase.className = 'inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20';
+      }
+    }
+
+    async function loadGitHubData() {
+      try {
+        const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
+        if (!userRes.ok) throw new Error('Usuario no encontrado');
+        const user = await userRes.json();
+        
+        document.getElementById('github-avatar').src = user.avatar_url;
+        document.getElementById('github-name').textContent = user.name || user.login;
+        document.getElementById('github-bio').textContent = user.bio || 'Sin biografía en GitHub.';
+        document.getElementById('github-repos-count').textContent = user.public_repos;
+        document.getElementById('github-followers-count').textContent = user.followers;
+        document.getElementById('nav-brand').innerHTML = `${user.login}<span class="text-indigo-400">.dev</span>`;
+        
+        document.getElementById('github-link').href = user.html_url;
+        document.getElementById('footer-github').href = user.html_url;
+
+        const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=9`);
+        const repos = await reposRes.json();
+        const grid = document.getElementById('projects-grid');
+
+        if (!Array.isArray(repos) || repos.length === 0) {
+          grid.innerHTML = `<p class="text-slate-400 text-sm col-span-full">No hay repositorios públicos disponibles.</p>`;
+          return;
+        }
+
+        grid.innerHTML = repos.map(repo => `
+          <div class="p-6 rounded-xl bg-slate-900 border border-slate-800/80 hover:border-slate-700 transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold text-white text-base truncate">${repo.name}</h3>
+                ${repo.language ? `<span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">${repo.language}</span>` : ''}
+              </div>
+              <p class="text-slate-400 text-xs line-clamp-3 mb-4">${repo.description || 'Sin descripción en el repositorio.'}</p>
+            </div>
+            <div class="flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-800/50">
+              <span>★ ${repo.stargazers_count}</span>
+              <a href="${repo.html_url}" target="_blank" class="text-indigo-400 hover:text-indigo-300 font-medium">Ver código →</a>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        document.getElementById('projects-grid').innerHTML = `<p class="text-red-400 text-sm col-span-full">Error al conectar con la API de GitHub.</p>`;
+      }
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const feedback = document.getElementById('form-feedback');
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      btn.disabled = true;
+      btn.textContent = 'Guardando...';
+
+      try {
+        if (!supabaseClient) throw new Error('Configura SUPABASE_URL y SUPABASE_ANON_KEY con tus credenciales.');
+
+        const { error } = await supabaseClient
+          .from('mensajes')
+          .insert([{ nombre: name, email: email, mensaje: message }]);
+
+        if (error) throw error;
+
+        feedback.classList.remove('hidden');
+        e.target.reset();
+      } catch (err) {
+        alert(err.message || 'Error al conectar con Supabase.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Enviar a Supabase';
+      }
+    });
+
+
+
+checkConnections();
+loadGitHubData();
+loadProyectosDesdeSupabase();
+  </script>
+</body>
+</html>
